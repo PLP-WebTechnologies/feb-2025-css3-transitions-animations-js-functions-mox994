@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animations and Local Storage</title>
+  <style>
+    @keyframes colorChange {
+      0% {
+        background-color: #3498db;
+      }
+      100% {
+        background-color: #2ecc71;
+      }
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      animation: colorChange 1s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <button>Click Me</button>
+
+  <script>
+    function storeUserPreference(color) {
+      localStorage.setItem("buttonColor", color);
+    }
+
+    function retrieveUserPreference() {
+      const color = localStorage.getItem("buttonColor");
+      if (color) {
+        document.querySelector("button").style.backgroundColor = color;
+      }
+    }
+
+    storeUserPreference("#9b59b6");
+    retrieveUserPreference();
+
+    document.querySelector("button").addEventListener("click", function() {
+      this.style.transition = "transform 0.3s ease";
+      this.style.transform = "scale(1.2)"; 
+      
+      setTimeout(() => {
+        this.style.transform = "scale(1)";
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>
